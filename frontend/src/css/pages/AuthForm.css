@@ -1,4 +1,3 @@
-/* src/pages/Form.css */
 .form-container {
   display: flex;
   justify-content: center;
@@ -37,7 +36,7 @@
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Quan trọng để padding không làm thay đổi width */
+  box-sizing: border-box;
 }
 
 .form-button {
@@ -61,10 +60,12 @@
   text-align: center;
   margin-top: 1rem;
 }
+
 .form-link a {
   color: #007bff;
   text-decoration: none;
 }
+
 .form-link a:hover {
   text-decoration: underline;
 }

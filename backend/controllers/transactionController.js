@@ -6,7 +6,6 @@ const Transaction = require('../models/TransactionModel');
 const getTransactions = async (req, res) => {
     try {
         // Tìm tất cả giao dịch thuộc về user đã đăng nhập (lấy từ middleware)
-        // Sắp xếp theo ngày gần nhất lên đầu
         const transactions = await Transaction.find({ user: req.user._id }).sort({ date: -1 });
         res.status(200).json(transactions);
     } catch (error) {
@@ -26,7 +25,7 @@ const addTransaction = async (req, res) => {
         }
 
         const transaction = await Transaction.create({
-            user: req.user._id, // Gán giao dịch này cho người dùng đang đăng nhập
+            user: req.user._id,
             amount,
             type,
             category,
@@ -59,7 +58,7 @@ const updateTransaction = async (req, res) => {
         const updatedTransaction = await Transaction.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { new: true, runValidators: true } // {new: true} để trả về bản ghi đã cập nhật
+            { new: true, runValidators: true }
         );
 
         res.status(200).json(updatedTransaction);
@@ -79,7 +78,6 @@ const deleteTransaction = async (req, res) => {
             return res.status(404).json({ message: 'Không tìm thấy giao dịch' });
         }
 
-        // Kiểm tra quyền sở hữu tương tự như khi update
         if (transaction.user.toString() !== req.user._id.toString()) {
             return res.status(401).json({ message: 'Không có quyền truy cập' });
         }

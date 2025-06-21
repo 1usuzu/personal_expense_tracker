@@ -1,16 +1,15 @@
-// models/UserModel.js
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: [true, 'Tên là bắt buộc'], // Thêm thông báo lỗi
+            required: [true, 'Tên là bắt buộc'],
         },
         email: {
             type: String,
             required: [true, 'Email là bắt buộc'],
-            unique: true, // Đảm bảo mỗi email là duy nhất
+            unique: true,
         },
         password: {
             type: String,
@@ -18,7 +17,7 @@ const userSchema = new mongoose.Schema(
         },
     },
     {
-        timestamps: true, // Tự động thêm 2 trường: createdAt và updatedAt
+        timestamps: true, // Tự động thêm trường createdAt và updatedAt
     }
 );
 

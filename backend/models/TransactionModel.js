@@ -1,11 +1,10 @@
-// models/TransactionModel.js
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema(
     {
         user: {
-            type: mongoose.Schema.Types.ObjectId, // Kiểu dữ liệu đặc biệt để lưu ID
-            ref: 'User', // Tham chiếu đến model 'User'
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
             required: true,
         },
         amount: {
@@ -14,7 +13,7 @@ const transactionSchema = new mongoose.Schema(
         },
         type: {
             type: String,
-            required: [true, 'Loại giao dịch là bắt buộc'], // 'income' hoặc 'expense'
+            required: [true, 'Loại giao dịch là bắt buộc'],
         },
         category: {
             type: String,
@@ -26,7 +25,7 @@ const transactionSchema = new mongoose.Schema(
         },
         note: {
             type: String,
-            required: false, // Ghi chú không bắt buộc
+            required: false,
         },
     },
     {

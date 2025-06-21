@@ -1,13 +1,11 @@
-// server.js
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const cors = require('cors');
 
-// Cấu hình để sử dụng file .env
 dotenv.config();
 
-connectDB(); // Kết nối đến MongoDB
+connectDB();
 
 const app = express();
 
@@ -21,7 +19,6 @@ app.use('/api/auth', require('./routes/authRoutes'));
 // Bảo vệ các route giao dịch bằng middleware 'protect'
 app.use('/api/transactions', require('./routes/transactionRoutes'));
 
-// Định nghĩa cổng cho server, ưu tiên lấy từ file .env hoặc mặc định là 5001
 const PORT = process.env.PORT || 5001;
 
 // Route thử nghiệm

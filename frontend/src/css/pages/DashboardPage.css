@@ -1,4 +1,3 @@
-/* src/pages/DashboardPage.css */
 .dashboard-container {
   padding: 20px 40px;
   max-width: 900px;
@@ -53,18 +52,14 @@
   align-items: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   border-left: 5px solid;
-  /* Dùng border để thể hiện màu thay vì chữ */
 }
 
-/* Thêm class 'income' hoặc 'expense' để định màu cho border */
 .transaction-item.income {
   border-left-color: #2ecc71;
-  /* green */
 }
 
 .transaction-item.expense {
   border-left-color: #e74c3c;
-  /* red */
 }
 
 .transaction-details .category {
@@ -91,12 +86,10 @@
   color: #e74c3c;
 }
 
-/* src/pages/DashboardPage.css */
 .transaction-right-section {
   display: flex;
   align-items: center;
   gap: 15px;
-  /* Khoảng cách giữa số tiền và nút */
 }
 
 .action-btn {
@@ -112,12 +105,10 @@
 
 .transaction-item:hover .action-btn {
   opacity: 1;
-  /* Nút sẽ hiện rõ hơn khi di chuột vào item */
 }
 
 .delete-btn {
   background-color: #e74c3c;
-  /* Màu đỏ cho nút xóa */
 }
 
 .delete-btn:hover {
@@ -126,9 +117,18 @@
 
 .edit-btn {
   background-color: #3498db;
-  /* Màu xanh cho nút sửa */
 }
 
 .edit-btn:hover {
   background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+  }
+
+  .dashboard-header h2 {
+    font-size: 1.2em;
+  }
 }

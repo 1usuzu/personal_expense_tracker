@@ -1,16 +1,13 @@
-// src/pages/DashboardPage.js
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import các Service và Component cần thiết
 import authService from '../services/authService';
 import transactionService from '../services/transactionService';
 import TransactionForm from '../components/TransactionForm';
 import Modal from '../components/Modal';
+import Stats from '../components/Stats';
 
-// Import CSS
-import '../css/DashboardPage.css';
+import '../css/pages/DashboardPage.css';
 
 function DashboardPage() {
     // Hooks
@@ -37,7 +34,6 @@ function DashboardPage() {
             } catch (error) {
                 console.error("Lỗi khi lấy dữ liệu giao dịch", error);
                 if (error.response && error.response.status === 401) {
-                    // Di chuyển logic logout vào đây
                     authService.logout();
                     navigate('/login');
                 }
@@ -46,6 +42,7 @@ function DashboardPage() {
 
         fetchTransactions();
     }, [navigate]);
+
     // ===== CÁC HÀM XỬ LÝ SỰ KIỆN =====
 
     const handleLogout = () => {
@@ -57,7 +54,6 @@ function DashboardPage() {
     const handleAddTransaction = async (transactionData) => {
         try {
             const response = await transactionService.addTransaction(transactionData);
-            // Cập nhật UI bằng cách thêm giao dịch mới vào đầu danh sách
             setTransactions([response.data, ...transactions]);
         } catch (error) {
             console.error("Lỗi khi thêm giao dịch", error);
@@ -70,7 +66,6 @@ function DashboardPage() {
         if (window.confirm('Bạn có chắc chắn muốn xóa giao dịch này không?')) {
             try {
                 await transactionService.deleteTransaction(id);
-                // Cập nhật UI bằng cách lọc bỏ giao dịch đã bị xóa
                 setTransactions(transactions.filter((t) => t._id !== id));
             } catch (error) {
                 console.error("Lỗi khi xóa giao dịch", error);
@@ -83,11 +78,10 @@ function DashboardPage() {
     const handleUpdateTransaction = async (id, transactionData) => {
         try {
             const response = await transactionService.updateTransaction(id, transactionData);
-            // Cập nhật UI bằng cách thay thế giao dịch cũ bằng giao dịch mới
             setTransactions(
                 transactions.map((t) => (t._id === id ? response.data : t))
             );
-            closeEditModal(); // Đóng modal sau khi cập nhật thành công
+            closeEditModal();
         } catch (error) {
             console.error("Lỗi khi cập nhật giao dịch", error);
             alert("Cập nhật thất bại!");
@@ -120,7 +114,8 @@ function DashboardPage() {
 
             <hr />
 
-            {/* Form để THÊM giao dịch mới */}
+            <Stats transactions={transactions} />
+
             <TransactionForm onAddTransaction={handleAddTransaction} />
 
             <section className="transactions-section">
@@ -154,7 +149,6 @@ function DashboardPage() {
                 </ul>
             </section>
 
-            {/* Modal để SỬA giao dịch, chỉ hiện khi isModalOpen là true */}
             <Modal isOpen={isModalOpen} onClose={closeEditModal}>
                 {currentTransaction && (
                     <TransactionForm

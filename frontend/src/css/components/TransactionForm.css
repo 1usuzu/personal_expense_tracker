@@ -53,3 +53,12 @@
 .transaction-form button:hover {
   background-color: #27ae60;
 }
+
+@media (max-width: 768px) {
+  .transaction-form .form-row {
+    /* Cho các ô input xếp chồng lên nhau thay vì nằm ngang */
+    flex-direction: column;
+    gap: 15px;
+    /* Giữ lại khoảng cách */
+  }
+}

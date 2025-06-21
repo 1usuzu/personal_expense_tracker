@@ -4,7 +4,6 @@ const User = require('../models/UserModel');
 const protect = async (req, res, next) => {
     let token;
 
-    // Kiểm tra xem header 'authorization' có tồn tại và bắt đầu bằng 'Bearer' không
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
             // 1. Lấy token từ header (loại bỏ chữ 'Bearer ')

@@ -1,7 +1,6 @@
-// src/components/TransactionForm.js (Code hoàn chỉnh)
-
 import React, { useState, useEffect } from 'react';
-import '../css/TransactionForm.css';
+
+import '../css/components/TransactionForm.css';
 
 function TransactionForm({ onAddTransaction, existingTransaction }) {
   const [amount, setAmount] = useState('');
@@ -18,7 +17,7 @@ function TransactionForm({ onAddTransaction, existingTransaction }) {
       setType(existingTransaction.type);
       setCategory(existingTransaction.category);
       setDate(new Date(existingTransaction.date).toISOString().slice(0, 10));
-      setNote(existingTransaction.note || ''); // Đảm bảo note không phải undefined
+      setNote(existingTransaction.note || '');
     }
   }, [existingTransaction, isEditMode]);
 
@@ -50,9 +49,6 @@ function TransactionForm({ onAddTransaction, existingTransaction }) {
     <form onSubmit={handleSubmit} className="transaction-form">
       <h3>{isEditMode ? 'Sửa Giao dịch' : 'Thêm giao dịch mới'}</h3>
 
-      {/* ======================================= */}
-      {/* PHẦN CODE BỊ THIẾU NẰM Ở ĐÂY */}
-      {/* ======================================= */}
       <div className="form-row">
         <input
           type="number"
@@ -86,9 +82,6 @@ function TransactionForm({ onAddTransaction, existingTransaction }) {
         value={note}
         onChange={(e) => setNote(e.target.value)}
       ></textarea>
-      {/* ======================================= */}
-      {/* KẾT THÚC PHẦN CODE BỊ THIẾU */}
-      {/* ======================================= */}
 
       <button type="submit">{isEditMode ? 'Lưu thay đổi' : 'Thêm Giao dịch'}</button>
     </form>

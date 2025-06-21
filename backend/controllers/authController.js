@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
         // 6. Nếu tạo thành công, tạo JWT và trả về cho client
         if (user) {
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-                expiresIn: '30d', // Token hết hạn sau 30 ngày
+                expiresIn: '30d',
             });
 
             res.status(201).json({
@@ -88,6 +88,4 @@ const loginUser = async (req, res) => {
     }
 };
 
-// Đăng xuất người dùng không cần thiết phải có route riêng vì JWT sẽ hết hạn sau một thời gian.
-// Tuy nhiên, nếu cần, có thể xóa token ở phía client để "đăng xuất" người dùng.
 module.exports = { registerUser, loginUser };
