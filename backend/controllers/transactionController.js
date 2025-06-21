@@ -1,12 +1,37 @@
 const Transaction = require('../models/TransactionModel');
+const moment = require('moment');
 
-// @desc    Lấy tất cả giao dịch của người dùng
+// @desc    Lấy tất cả giao dịch của người dùng (có thể lọc)
 // @route   GET /api/transactions
 // @access  Private
 const getTransactions = async (req, res) => {
     try {
-        // Tìm tất cả giao dịch thuộc về user đã đăng nhập (lấy từ middleware)
-        const transactions = await Transaction.find({ user: req.user._id }).sort({ date: -1 });
+        // Xây dựng query cơ bản: luôn lấy giao dịch của user đang đăng nhập
+        const query = {
+            user: req.user._id,
+        };
+
+        // Lấy các tham số lọc từ URL (req.query)
+        const { frequency, type } = req.query;
+
+        // Xử lý lọc theo khoảng thời gian (frequency)
+        if (frequency && frequency !== 'all') {
+            if (frequency === 'custom') {
+            } else {
+                query.date = {
+                    $gt: moment().subtract(Number(frequency), 'days').toDate(),
+                };
+            }
+        }
+
+        // Xử lý lọc theo loại (thu/chi)
+        if (type && type !== 'all') {
+            query.type = type;
+        }
+
+        // Tìm tất cả giao dịch khớp với query và sắp xếp theo ngày gần nhất
+        const transactions = await Transaction.find(query).sort({ date: -1 });
+
         res.status(200).json(transactions);
     } catch (error) {
         res.status(500).json({ message: error.message });

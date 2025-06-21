@@ -6,6 +6,7 @@ import transactionService from '../services/transactionService';
 import TransactionForm from '../components/TransactionForm';
 import Modal from '../components/Modal';
 import Stats from '../components/Stats';
+import Filters from '../components/Filters';
 
 import '../css/pages/DashboardPage.css';
 
@@ -22,6 +23,8 @@ function DashboardPage() {
     // State lưu trữ giao dịch đang được chọn để sửa
     const [currentTransaction, setCurrentTransaction] = useState(null);
 
+    const [filters, setFilters] = useState({ frequency: '7', type: 'all' });
+
     // Lấy thông tin người dùng từ localStorage
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -29,7 +32,7 @@ function DashboardPage() {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const response = await transactionService.getTransactions();
+                const response = await transactionService.getTransactions(filters);
                 setTransactions(response.data);
             } catch (error) {
                 console.error("Lỗi khi lấy dữ liệu giao dịch", error);
@@ -39,9 +42,8 @@ function DashboardPage() {
                 }
             }
         };
-
         fetchTransactions();
-    }, [navigate]);
+    }, [filters, navigate]);
 
     // ===== CÁC HÀM XỬ LÝ SỰ KIỆN =====
 
@@ -118,6 +120,8 @@ function DashboardPage() {
 
             <TransactionForm onAddTransaction={handleAddTransaction} />
 
+            <Filters onFilterChange={setFilters} />
+
             <section className="transactions-section">
                 <h3>Lịch sử giao dịch</h3>
                 <ul className="transactions-list">
@@ -134,12 +138,15 @@ function DashboardPage() {
                                         {t.type === 'expense' ? '-' : '+'}
                                         {t.amount.toLocaleString('vi-VN')} VND
                                     </div>
-                                    <button onClick={() => openEditModal(t)} className="action-btn edit-btn">
-                                        Sửa
-                                    </button>
-                                    <button onClick={() => handleDeleteTransaction(t._id)} className="action-btn delete-btn">
-                                        Xóa
-                                    </button>
+
+                                    <div className="action-buttons">
+                                        <button onClick={() => openEditModal(t)} className="action-btn edit-btn">
+                                            Sửa
+                                        </button>
+                                        <button onClick={() => handleDeleteTransaction(t._id)} className="action-btn delete-btn">
+                                            Xóa
+                                        </button>
+                                    </div>
                                 </div>
                             </li>
                         ))

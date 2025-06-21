@@ -1,8 +1,9 @@
 import API from './api';
 
 // Lấy tất cả giao dịch
-const getTransactions = () => API.get('/transactions');
-
+const getTransactions = (filters) => {
+  return API.get('/transactions', { params: filters });
+};
 // Thêm giao dịch mới
 const addTransaction = (transactionData) => API.post('/transactions', transactionData);
 

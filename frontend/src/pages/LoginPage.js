@@ -15,7 +15,7 @@ function LoginPage() {
     try {
       const userData = { email, password };
       await authService.login(userData);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       const message = error.response?.data?.message || 'Đã có lỗi xảy ra.';
       alert(message);
