@@ -1,0 +1,134 @@
+/* src/pages/DashboardPage.css */
+.dashboard-container {
+  padding: 20px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-header h2 {
+  color: #333;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
+.transactions-section h3 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.transactions-list {
+  list-style: none;
+  padding: 0;
+}
+
+.transaction-item {
+  background: white;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid;
+  /* Dùng border để thể hiện màu thay vì chữ */
+}
+
+/* Thêm class 'income' hoặc 'expense' để định màu cho border */
+.transaction-item.income {
+  border-left-color: #2ecc71;
+  /* green */
+}
+
+.transaction-item.expense {
+  border-left-color: #e74c3c;
+  /* red */
+}
+
+.transaction-details .category {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.transaction-details .date {
+  color: #777;
+  font-size: 0.9em;
+}
+
+.transaction-amount {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.transaction-amount.income {
+  color: #2ecc71;
+}
+
+.transaction-amount.expense {
+  color: #e74c3c;
+}
+
+/* src/pages/DashboardPage.css */
+.transaction-right-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  /* Khoảng cách giữa số tiền và nút */
+}
+
+.action-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  font-size: 0.8em;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.transaction-item:hover .action-btn {
+  opacity: 1;
+  /* Nút sẽ hiện rõ hơn khi di chuột vào item */
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  /* Màu đỏ cho nút xóa */
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.edit-btn {
+  background-color: #3498db;
+  /* Màu xanh cho nút sửa */
+}
+
+.edit-btn:hover {
+  background-color: #2980b9;
+}
