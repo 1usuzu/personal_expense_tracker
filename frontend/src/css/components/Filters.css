@@ -40,3 +40,15 @@
 .apply-btn:hover {
     background-color: #0056b3;
 }
+
+@media (max-width: 768px) {
+    .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .apply-btn {
+        padding: 12px;
+    }
+}
